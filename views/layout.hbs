@@ -22,7 +22,8 @@
                         <li><a href="/logout">Logout</a></li>
                         <li><a class="yellow-text text-accent-2" href="/profile"><i class="fa fa-user-secret fa-2x" aria-hidden="true"></i></a></li>
                     {{else}}
-                        <li><a href="/login">Login</a></li>
+                        <li><a href="#login">Login</a></li>
+                        <li><a href="#register">Register</a></li>
                     {{/if}}
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
@@ -31,12 +32,74 @@
                         <li><a href="/logout">Logout</a></li>
                         <li><a class="yellow-text text-accent-2" href="/profile"><i class="yellow-text text-accent-2 fa fa-user-secret fa-3x" aria-hidden="true"></i></a></li>
                     {{else}}
-                        <li><a href="/login">Login</a></li>
+                        <li><a href="#login">Login</a></li>
+                        <li><a href="#register">Register</a></li>
                     {{/if}}
                 </ul>
             </div>
         </nav>
     </header>
+
+    <!--Modal for login-->
+    <div id="login" class="modal">
+        <div class="modal-content">
+            <h4 class="center-align">Login</h4>
+            <form action="/user/login" method="post" id="loginForm">
+                <div class="row">
+                    <form class="col s12">
+                        <div class="input-field col s12">
+                            <input id="username" name="username" type="text" class="validate">
+                            <label for="username">Username</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="password" name="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="row">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Submit &nbsp;
+                                <i class="fa fa-sign-in fa-2x" aria-hidden="true"></i>
+                            </button>
+                            <p>or <a href="#register" style="color: #006600">Register</a></p>
+                        </div>
+                    </form>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--End of Modal-->
+
+    <!--Modal for registration-->
+    <div id="register" class="modal">
+        <div class="modal-content">
+            <h4 class="center-align">Register</h4>
+            <form action="/user/register" method="post" id="registerForm">
+                <div class="row">
+                    <form class="col s12">
+                        <div class="input-field col s12">
+                            <input id="username" name="username" type="text" class="validate">
+                            <label for="username">Username</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="email" name="email" type="email" class="validate">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="passwordRegister" name="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="password2" name="password2" type="password" class="validate">
+                            <label for="password2">Repeat Password</label>
+                        </div>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit &nbsp;
+                            <i class="fa fa-sign-in fa-2x" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--End of modal-->
 
     <main>
         {{{body}}}
@@ -72,21 +135,77 @@
     <script src="js/materialize.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/react.js"></script>
-    <script src="js/scrollreveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <!--<script src="js/scrollreveal.js"></script>-->
 	<!-- endinject -->
-    <script src="js/main.js"></script>
     <script>
-        window.sr = ScrollReveal();
-        sr.reveal('#popularMovies', {
-            duration: 2000,
-            distance:'1000px',
-            origin:'left'
+        $("#loginForm").validate({
+            rules: {
+                username: {
+                    required: true
+                },
+                password: {
+                    required: true,
+                    minlength: 8
+                }
+            },
+            //For custom messages
+            messages: {
+                username:{
+                    required: "Enter a username"
+                },
+                password:{
+                    required: "Enter a password",
+                    minlength: "Must enter at least 8 characters"
+                }
+            },
+            errorElement : 'div',
+            errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            }
         });
-        sr.reveal('#otherMovies', {
-            duration: 2000,
-            distance:'1000px',
-            origin: 'right',
-            viewFactor: 0.4
+        $("#registerForm").validate({
+            rules: {
+                username: {
+                    required: true
+                },
+                email: "required",
+                password: {
+                    required: true,
+                    minlength: 8
+                },
+                password2: {
+                    equalTo: "#passwordRegister"
+                }
+            },
+            //For custom messages
+            messages: {
+                username:{
+                    required: "Enter a username"
+                },
+                password:{
+                    required: "Enter a password",
+                    minlength: "Must enter at least 8 characters"
+                },
+                password2: {
+                    equalTo: "Passwords do not match"
+                },
+                email: "Enter a valid email"
+            },
+            errorElement : 'div',
+            errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            }
         });
     </script>
   </body>

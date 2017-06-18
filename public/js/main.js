@@ -1,15 +1,11 @@
 $(document).ready(function(){
     $(".button-collapse").sideNav();
+    $('.parallax').parallax();
+    $('.slider').slider({
+        indicators: false
+    });
+    $('.modal').modal();
     $(document).ready(function(){
-        $('.parallax').parallax();
+        $('.materialboxed').materialbox();
     });
-    $('.carousel.carousel-slider').carousel({
-        fullWidth: true,
-        duration: 1000
-    });
-    autoplay();
-    function autoplay() {
-        setTimeout(autoplay, 10000);
-        $('.carousel').carousel('next');
-    }
 });

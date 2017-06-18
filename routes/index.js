@@ -10,6 +10,10 @@ router.get('/browse', function(req, res, next) {
     res.render('browse');
 });
 
+router.get('/movie', function (req, res, next) {
+    res.render('movie');
+});
+
 // router.get('/login', function(req, res, next) {
 //     res.render('login');
 // });
