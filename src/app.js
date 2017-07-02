@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
 class App extends Component {
-   render() {
-      return (
-         <div>
-            Works!
-         </div>
-      )
-   }
+    render() {
+        return (
+            <div>
+                Works!
+            </div>
+        )
+    }
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
