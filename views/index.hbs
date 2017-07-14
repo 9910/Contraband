@@ -35,52 +35,24 @@
 </section>
 <!--Slider End-->
 
-<!--Popular Movies-->
-<section id="popularMovies">
+<!--Best Movies-->
+<section id="bestMovies">
     <div class="parallax-container" style="height: 10%;">
         <div class="container">
-            <h2 class="center-align yellow-text text-accent-2" style="font-family: Vanity;">Popular Movies</h2>
+            <h2 class="center-align yellow-text text-accent-2" style="font-family: Vanity;">Best Movies</h2>
             <div class="row">
+                {{#each bestMovies}}
                 <div class="col l3 s6">
                     <div class="card">
                         <div class="card-image">
-                            <a href="#">
-                                <img class="movieCover responsive-img" src="/images/movieCover.jpg">
+                            <a href="/movie/{{this.id}}">
+                                <img class="movieCover responsive-img" src={{this.medium_cover_image}}>
                             </a>
                         </div>
                     </div>
-                    <h5 class="flow-text">John Wick 2</h5>
+                    <h5 class="flow-text">{{this.title}}</h5>
                 </div>
-                <div class="col l3 s6">
-                    <div class="card">
-                        <div class="card-image">
-                            <a href="#">
-                                <img class="movieCover responsive-img" src="/images/movieCover.jpg">
-                            </a>
-                        </div>
-                    </div>
-                    <h5 class="flow-text">John Wick 2</h5>
-                </div>
-                <div class="col l3 s6">
-                    <div class="card">
-                        <div class="card-image">
-                            <a href="#">
-                                <img class="movieCover responsive-img" src="/images/movieCover.jpg">
-                            </a>
-                        </div>
-                    </div>
-                    <h5 class="flow-text">John Wick 2</h5>
-                </div>
-                <div class="col l3 s6">
-                    <div class="card">
-                        <div class="card-image">
-                            <a href="#">
-                                <img class="movieCover responsive-img" src="/images/movieCover.jpg">
-                            </a>
-                        </div>
-                    </div>
-                    <h5 class="flow-text">John Wick 2</h5>
-                </div>
+                {{/each}}
             </div>
         </div>
         <div class="parallax">
@@ -88,7 +60,7 @@
         </div>
     </div>
 </section>
-<!--Popular Movies End-->
+<!--Best Movies End-->
 
 <!--Other Movies-->
 <section id="otherMovies">
@@ -190,7 +162,7 @@
 <script src="/js/scrollreveal.js"></script>
 <script>
     window.sr = ScrollReveal();
-    sr.reveal('#popularMovies', {
+    sr.reveal('#bestMovies', {
         duration: 2000,
         distance:'1000px',
         origin:'left'

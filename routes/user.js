@@ -9,7 +9,11 @@ var User = require('../controllers/index')['user'];
 
 /* GET users listing. */
 router.get('/:id', ensureAuthenticated, function (req, res, next) {
-    res.render('userProfile');
+    req.user.history.push({
+       name: 'John Wick',
+        id: '1234112'
+    });
+    res.render('userProfile', { user: req.user });
 });
 
 passport.serializeUser(function (user, done) {
@@ -57,6 +61,7 @@ router.post('/register', function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
     var email = req.body.email;
+    var ip = req.connection.remoteAddress;
 
     User.find({username: username}, function (err, user) {
         if (user.length === 0) {
@@ -71,7 +76,7 @@ router.post('/register', function (req, res, next) {
                     throw err;
                 }
                 console.log(user);
-                res.redirect('/user');
+                res.redirect('/user/' + user.id);
             });
         }
         else {
