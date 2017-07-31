@@ -9565,7 +9565,6 @@ var App = function (_Component) {
 				fetch(SEARCH_URL + query, { method: 'GET' }).then(function (response) {
 					return response.json();
 				}).then(function (json) {
-					console.log('Searched Movies:', json);
 					_this2.setState({ searchedMovies: json.data.movies });
 				});
 			}
@@ -9574,19 +9573,75 @@ var App = function (_Component) {
 		key: 'showMovies',
 		value: function showMovies() {
 			if (this.state.searchedMovies.length != 0) {
-				console.log('Movies', this.state.searchedMovies);
 				return this.state.searchedMovies.map(function (movie) {
 					return _react2.default.createElement(
-						'p',
-						{ key: movie.id },
-						'Movie Title: ',
-						movie.title
+						'div',
+						{ className: 'row', style: { padding: 20 } },
+						_react2.default.createElement(
+							'a',
+							{ href: '/movie/' + movie.id },
+							_react2.default.createElement(
+								'div',
+								{ className: 'col l4 s12' },
+								_react2.default.createElement('img', { className: 'movieCoverProfile', src: movie.large_cover_image, alt: 'Image is loading...' })
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col l8 s12 white-text' },
+								_react2.default.createElement(
+									'h3',
+									{ className: 'center-align' },
+									movie.title
+								),
+								_react2.default.createElement('hr', null),
+								_react2.default.createElement(
+									'p',
+									null,
+									'Year: ',
+									_react2.default.createElement(
+										'span',
+										{ className: 'yellow-text text-accent-2' },
+										movie.year
+									)
+								),
+								_react2.default.createElement(
+									'p',
+									null,
+									'Rating: ',
+									_react2.default.createElement(
+										'span',
+										{ className: 'yellow-text text-accent-2' },
+										movie.rating
+									)
+								),
+								_react2.default.createElement(
+									'p',
+									null,
+									'Runtime: ',
+									_react2.default.createElement(
+										'span',
+										{ className: 'yellow-text text-accent-2' },
+										movie.runtime
+									)
+								),
+								_react2.default.createElement(
+									'p',
+									null,
+									'Description: ',
+									_react2.default.createElement(
+										'span',
+										{ className: 'yellow-text text-accent-2' },
+										movie.description_full
+									)
+								)
+							)
+						)
 					);
 				});
 			} else {
 				return _react2.default.createElement(
-					'p',
-					null,
+					'h3',
+					{ className: 'center-align white-text' },
 					'No Movies Searched'
 				);
 			}
@@ -9639,7 +9694,7 @@ var App = function (_Component) {
 				),
 				_react2.default.createElement(
 					'div',
-					null,
+					{ className: 'container' },
 					this.showMovies()
 				)
 			);

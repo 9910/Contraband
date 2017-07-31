@@ -17,7 +17,6 @@ class App extends Component {
 			fetch(SEARCH_URL + query, {method: 'GET'})
 				.then(response => response.json())
 				.then(json => {
-					console.log('Searched Movies:', json);
 					this.setState({searchedMovies: json.data.movies});
 				});
 		}
@@ -25,16 +24,29 @@ class App extends Component {
 
 	showMovies() {
 		if(this.state.searchedMovies.length != 0) {
-			console.log('Movies', this.state.searchedMovies);
 			return (
 				this.state.searchedMovies.map(movie => {
 					return (
-						<p key={movie.id}>Movie Title: {movie.title}</p>
+						<div className="row" style={{padding: 20}}>
+							<a href={'/movie/' + movie.id}>
+							    <div className="col l4 s12">
+							        <img className="movieCoverProfile" src={movie.large_cover_image} alt="Image is loading..." />
+							    </div>
+							    <div className="col l8 s12 white-text">
+							        <h3 className="center-align">{movie.title}</h3>
+							        <hr />
+							        <p>Year: <span className="yellow-text text-accent-2">{movie.year}</span></p>
+							        <p>Rating: <span className="yellow-text text-accent-2">{movie.rating}</span></p>
+							        <p>Runtime: <span className="yellow-text text-accent-2">{movie.runtime}</span></p>
+							        <p>Description: <span className="yellow-text text-accent-2">{movie.description_full}</span></p>
+							    </div>
+						    </a>
+						</div>
 					)
 				})
 			)
 		} else {
-			return <p>No Movies Searched</p>
+			return <h3 className="center-align white-text">No Movies Searched</h3>
 		}
 	}
 
@@ -55,7 +67,7 @@ class App extends Component {
 				        <img src="/images/searchBackground.jpg" />
 				    </div>
 				</div>
-				<div>
+				<div className="container">
 					{this.showMovies()}
 				</div>
 			</div>
