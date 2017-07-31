@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
    entry: {
-      app: './src/index.js'
+      app: './src/index.jsx'
    },
    output: {
       filename: 'public/js/react.js',

@@ -9,10 +9,6 @@ var User = require('../controllers/index')['user'];
 
 /* GET users listing. */
 router.get('/:id', ensureAuthenticated, function (req, res, next) {
-    req.user.history.push({
-       name: 'John Wick',
-        id: '1234112'
-    });
     res.render('userProfile', { user: req.user });
 });
 
