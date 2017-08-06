@@ -1,9 +1,9 @@
 # Contraband
-[![Node Version](https://img.shields.io/gem/v/t.svg)][Node]
-[![NPM Version](https://img.shields.io/travis/sferik/t.svg)][NPM]
+[![Node Version](https://img.shields.io/node/v/gh-badges.svg)][Node]
+[![NPM Version](https://img.shields.io/npm/v/npm.svg)][NPM]
 
-[Node]: https://rubygems.org/gems/t
-[NPM]: https://travis-ci.org/sferik/t
+[Node]: https://nodejs.org/en/
+[NPM]: https://www.npmjs.com/
 
 #### WebSite/APP for downloading movies.
 Contraband enables you to download all the latest movies in HD, FULL HD and 3D.
@@ -17,6 +17,6 @@ Second, install all the required dependencies:
 
 And last run the application:
 
-    gulp start
+    npm start
 
 
