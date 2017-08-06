@@ -25,9 +25,6 @@ class PaginationMain extends Component {
 	}
 
 	handleSelect(pageNumber) {
-		console.log('Page Number:', pageNumber);
-		console.log('Movies', this.state.movies);
-		console.log('Movie Count', this.state.numOfMovies);
 		const BASE_URL = 'https://yts.ag/api/v2/list_movies.json?limit=8&page=';
 
 		fetch(BASE_URL + pageNumber, {method: 'GET'})

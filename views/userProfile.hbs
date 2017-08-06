@@ -15,7 +15,7 @@
         <table class="striped centered">
             <thead>
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Movie Name</th>
                 <th>Download</th>
             </tr>
@@ -23,9 +23,9 @@
             <tbody>
             {{#each user.history}}
             <tr>
-                <td>2</td>
-                <td>{{this.name}}</td>
-                <td><a href="/user/download/{{this.id}}"><i class="fa fa-film fa-2x" aria-hidden="true"></i></a></td>
+                <td>{{this.id}}</td>
+                <td>{{this.title}}</td>
+                <td><a href="/movie/{{this.id}}"><i class="fa fa-film fa-2x" aria-hidden="true"></i></a></td>
             </tr>
             {{/each}}
             </tbody>
