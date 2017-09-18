@@ -69,7 +69,9 @@ router.get('/user/download/:quality/:id', ensureAuthenticated, function(req, res
     fetch('https://yts.ag/api/v2/movie_details.json?&movie_id=' + req.params.id)
         .then(response => response.json())
         .then(json => {
-            User.update(req.user.id, { history: json.data.movie }, function(err, user) {
+            req.user.history.push(json.data.movie);
+            var history = req.user.history;
+            User.update(req.user.id, { history: history }, function(err, user) {
                 if (req.params.quality === "720p") {
                     json.data.movie.torrents.forEach(function(torrent) {
                         if (torrent.quality === "720p") {

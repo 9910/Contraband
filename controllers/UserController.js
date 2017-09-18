@@ -2,8 +2,8 @@ var bcrypt = require('bcrypt-nodejs');
 var User = require('../models/User');
 
 module.exports = {
-    find: function (params, callback) {
-        User.find(params, function (err, users) {
+    find: function(params, callback) {
+        User.find(params, function(err, users) {
             if (err) {
                 callback(err, null);
                 return;
@@ -11,8 +11,8 @@ module.exports = {
             callback(null, users);
         });
     },
-    findById: function (id, callback) {
-        User.findById(id, function (err, user) {
+    findOne: function(params, callback) {
+        User.findOne(params, function(err, user) {
             if (err) {
                 callback(err, null);
                 return;
@@ -20,8 +20,8 @@ module.exports = {
             callback(null, user);
         });
     },
-    update: function (id, params, callback) {
-        User.findByIdAndUpdate(id, params, {new: true}, function (err, user) {
+    findById: function(id, callback) {
+        User.findById(id, function(err, user) {
             if (err) {
                 callback(err, null);
                 return;
@@ -29,14 +29,23 @@ module.exports = {
             callback(null, user);
         });
     },
-    create: function (user, callback) {
-        bcrypt.hash(user.password, null, null, function (err, hash) {
+    update: function(id, params, callback) {
+        User.findByIdAndUpdate(id, params, { new: true }, function(err, user) {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+            callback(null, user);
+        });
+    },
+    create: function(user, callback) {
+        bcrypt.hash(user.password, null, null, function(err, hash) {
             if (err) {
                 callback(err, null);
                 return;
             }
             user.password = hash;
-            User.create(user, function (err, user) {
+            User.create(user, function(err, user) {
                 if (err) {
                     callback(err, null);
                     return;
@@ -45,8 +54,8 @@ module.exports = {
             });
         });
     },
-    delete: function (id, callback) {
-        User.remove(id, function (err) {
+    delete: function(id, callback) {
+        User.remove(id, function(err) {
             if (err) {
                 callback(err, null);
                 return;
@@ -54,8 +63,8 @@ module.exports = {
             callback(null, true);
         });
     },
-    comparePassword: function (password, hash, callback) {
-        bcrypt.compare(password, hash, function (err, res) {
+    comparePassword: function(password, hash, callback) {
+        bcrypt.compare(password, hash, function(err, res) {
             console.log(res);
             if (err) {
                 callback(err, null);
