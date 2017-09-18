@@ -7,6 +7,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "aws-sdk": "^2.117.0",
     "bcrypt": "*",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.15.1",
@@ -22,7 +23,8 @@
     "mongodb": "*",
     "mongoose": "^4.9.8",
     "morgan": "~1.7.0",
-    "multer": "*",
+    "multer": "^1.3.0",
+    "multer-s3": "^2.7.0",
     "node-fetch": "^1.7.1",
     "passport": "*",
     "passport-facebook": "^2.1.1",

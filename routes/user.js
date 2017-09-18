@@ -4,10 +4,37 @@ var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook');
 var TwitterStrategy = require('passport-twitter');
+var aws = require('aws-sdk');
+var multer = require('multer');
+var multerS3 = require('multer-s3');
 var bcrypt = require('bcrypt-nodejs');
 
-// Controller
+var picName;
+//Handle File Uploads
+var s3 = new aws.S3({
+    "accessKeyId": 'AKIAJPQFALDU52YKNDHA',
+    "secretAccessKey": "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",
+    "region": 'us-west-2'
+});
+
+var upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'contraband123',
+        metadata: function(req, file, cb) {
+            cb(null, { fieldName: file.fieldname });
+        },
+        key: function(req, file, cb) {
+            console.log(file);
+            picName = Date.now().toString();
+            cb(null, Date.now().toString()); //use Date.now() for unique file keys
+        }
+    })
+});
+
+// Controllers
 var User = require('../controllers/index')['user'];
+var Review = require('../controllers/index')['review'];
 
 /* GET users listing. */
 router.get('/admin', ensureAuthenticatedAdminStyle, function(req, res) {
@@ -36,6 +63,19 @@ router.get('/:id', ensureAuthenticated, function(req, res, next) {
     res.render('userProfile', { user: req.user });
 });
 
+router.post('/addReview', ensureAuthenticated, function(req, res, next) {
+    console.log('MovieID:', req.body);
+    Review.create({
+        movieId: req.body.movieId,
+        username: req.user.username,
+        data: req.body.data
+    }, function(err, review) {
+        if (err) throw err;
+        console.log('Review added:', review);
+        res.redirect('/movie/' + req.body.movieId);
+    });
+});
+
 passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
@@ -43,6 +83,14 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
         done(err, user);
+    });
+});
+
+router.post('/changePic', ensureAuthenticated, upload.single('file'), function(req, res) {
+    User.update(req.user.id, { picture: picName }, function(err, user) {
+        if (err) throw err;
+        console.log('User updated: ', user);
+        res.redirect('/user/' + user.id);
     });
 });
 

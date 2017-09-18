@@ -7,6 +7,7 @@ var UserSchema = new mongoose.Schema({
     username: { type: String, default: 'Forgot Username' },
     password: { type: String, required: true },
     email: { type: String },
+    picture: String,
     history: []
 });
 

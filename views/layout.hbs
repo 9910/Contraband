@@ -70,6 +70,34 @@
     </div>
     <!--End of Modal-->
 
+    <!--Modal for ProfilePicChange-->
+    <div id="profilePic" class="modal">
+        <div class="modal-content">
+            <h4 class="center-align">Change Your Profile Picture</h4>
+            <form action="/user/changePic" method="post" id="profilePicForm" enctype='multipart/form-data'>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>File</span>
+                                <input type="file" name="file">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="btn waves-effect waves-light yellow black-text" type="submit" name="action">Change &nbsp;
+                            <i class="fa fa-sign-in fa-2x" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--End of Modal-->
+
     <!--Modal for registration-->
     <div id="register" class="modal">
         <div class="modal-content">

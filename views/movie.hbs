@@ -73,5 +73,33 @@
         </div>
         {{/each}}
     </div>
+    {{#if user}}
+        <form method="post" action="/user/addReview" style="margin-top: 50px; margin-bottom: 30px;">
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="data" name="data" class="materialize-textarea white-text"></textarea>
+                    <label for="data">Your review</label>
+                </div>
+                <div class="input-field col s12">
+                    <input type="hidden" name="movieId" value={{movie.id}}></input>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Add Review
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+        {{#each reviews}}
+            <h5 class="yellow-text left-right">User: {{this.username}}</h5>
+            <p class="flow-text white-text" style="font-size: 14px;">{{this.data}}</p>
+            <hr>
+        {{/each}}
+    {{else}}
+        <h4 class="yellow-text center-align" style="margin-top: 50px; margin-bottom: 30px;"><b>Login Or Make an Account to Leave Reviews</b></h4>
+        {{#each reviews}}
+            <h5 class="yellow-text">User: {{this.username}}</h5>
+            <p class="flow-text white-text" style="font-size: 14px;">{{this.data}}</p>
+            <hr>
+        {{/each}}
+    {{/if}}
     <!--End movie download links-->
 </div>

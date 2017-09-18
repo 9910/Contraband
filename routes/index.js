@@ -13,6 +13,7 @@ paypal.configure({
 console.log('ENV', process.env.PAYPAL_CLIENT_ID);
 
 var User = require('../controllers/index')['user'];
+var Review = require('../controllers/index')['review'];
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -58,9 +59,13 @@ router.get('/movie/:id', function(req, res) {
             return res.json();
         }).then(function(json) {
             console.log('Movie data', json);
-            res.render('movie', {
-                movie: json.data.movie
-            }); // 6538 5588
+            Review.find({ movieId: req.params.id }, function(err, reviews) {
+                if (err) throw err;
+                res.render('movie', {
+                    movie: json.data.movie,
+                    reviews: reviews
+                }); // 6538 5588
+            });
         });
 });
 
