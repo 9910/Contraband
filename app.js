@@ -12,7 +12,7 @@ var hat = require('hat');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
-mongoose.connect("mongodb://admin123:admin123123@ds141264.mlab.com:41264/contraband");
+mongoose.connect(process.env.MONGOLAB_URL);
 
 var routes = require('./routes/index');
 var user = require('./routes/user');

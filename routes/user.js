@@ -12,9 +12,9 @@ var bcrypt = require('bcrypt-nodejs');
 var picName;
 //Handle File Uploads
 var s3 = new aws.S3({
-    "accessKeyId": 'AKIAJPQFALDU52YKNDHA',
-    "secretAccessKey": "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",
-    "region": 'us-west-2'
+    "accessKeyId": process.env.ACCESS_KEY_ID,
+    "secretAccessKey": process.env.ACCESS_SECRET_ID,
+    "region": process.env.REGION
 });
 
 var upload = multer({
@@ -158,8 +158,8 @@ router.post('/register', function(req, res, next) {
 
 // Facebook Auth
 passport.use(new FacebookStrategy({
-        clientID: '117507792250019',
-        clientSecret: '829f789fbf8cfa108e9720b56001a09b',
+        clientID: process.env.FB_CLIENT_ID,
+        clientSecret: process.env.FB_SECRET,
         callbackURL: "http://localhost:3000/user/facebook/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
@@ -202,8 +202,8 @@ router.get('/facebook/callback', passport.authenticate('facebook', { failureRedi
 
 // Twitter Auth
 passport.use(new TwitterStrategy({
-        consumerKey: 'F1r4PHcvLizU8vU6PzLhpPMAl',
-        consumerSecret: 'PTyY843BIPuZ7dqifRGpQey1TMmuMk3nzZtyjgvVG7Jn4WMjyQ',
+        consumerKey: process.env.TWITTER_CUSTOMER_KEY,
+        consumerSecret: process.env.TWITTER_KEY,
         callbackURL: "http://localhost:3000/user/twitter/callback"
     },
     function(token, tokenSecret, profile, cb) {
